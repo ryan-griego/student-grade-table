@@ -10,11 +10,13 @@ class App {
 
   handleGetGradesError(error) {
     console.error(error);
+    console.log("Error");
 
   }
 
   handleGetGradesSuccess(grades) {
     console.log(grades);
+    console.log("Error");
 
   }
 
@@ -23,13 +25,14 @@ class App {
       method: "GET",
       url: "https://sgt.lfzprototypes.com/api/grades",
       dataType: "json",
-      error: handleGetGradesError,
-      success: handleGetGradesSuccess
+      "x-access-token": Ypc8MXvf,
+      error: this.handleGetGradesError,
+      success: this.handleGetGradesSuccess
     });
   }
 
   start() {
-    this.getGrades;
+    this.getGrades();
   }
 
 
