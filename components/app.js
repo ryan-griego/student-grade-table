@@ -15,8 +15,8 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
-    console.log(grades);
-    console.log("Error");
+    console.log("log grades", grades);
+    console.log("Success");
 
   }
 
@@ -25,7 +25,8 @@ class App {
       method: "GET",
       url: "https://sgt.lfzprototypes.com/api/grades",
       dataType: "json",
-      "x-access-token": Ypc8MXvf,
+      headers: { 'x-access-token': "Ypc8MXvf" },
+
       error: this.handleGetGradesError,
       success: this.handleGetGradesSuccess
     });
