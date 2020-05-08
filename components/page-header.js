@@ -7,7 +7,7 @@ class PageHeader {
 
   updateAverage(average) {
     var badge = $('.badge');
-    badge[0].textContent = average;
+    badge.text(average);
   }
 
   newAverage() {

@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+    integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.css"
     integrity="sha256-pok3KZeHPJvZi4o04UfObTBGUAIkwF/zZWbh+UuKaoE=" crossorigin="anonymous" />
 
@@ -27,28 +28,54 @@
 
       </div>
     </header>
-<table class="table table-striped">
 
-    <tr>
-      <td><strong>Student Name</strong></td>
-      <td><strong>Course</strong></td>
-      <td><strong>Grade</strong></td>
-    </tr>
+      <div class="row">
+        <div class="col-sm-8">
+      <table class="table table-striped">
+
+        <tr>
+          <td><strong>Student Name</strong></td>
+          <td><strong>Course</strong></td>
+          <td><strong>Grade</strong></td>
+        </tr>
 
 
 
-</table>
+      </table>
+        </div>
+        <div class="col-sm-4">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Course</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <div class="form-group">
+        <label for="exampleInputPassword1">Grade</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Cancel</button>
+
+      </form>
+        </div>
+
+        </div>
+      </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="components/app.js"></script>
   <script src="components/grade-table.js"></script>
-<<<<<<< HEAD
-=======
   <script src="components/page-header.js"></script>
 
->>>>>>> view-average-grade
 
 <script src="main.js"></script>
 
