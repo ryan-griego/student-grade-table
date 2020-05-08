@@ -1,11 +1,11 @@
-table = document.querySelector('table');
-console.log(table);
+var table = document.querySelector('table');
 
 var newGradeTable = new GradeTable(table);
-console.log("log newGradeTable", newGradeTable);
 
-var newApp = new App(newGradeTable);
-console.log("log newApp", newApp);
+var header = document.querySelector('header');
+var newPageHeader = new PageHeader(header);
+
+var newApp = new App(newGradeTable, newPageHeader);
 
 newGradeTable.updateGrades();
 newApp.start();

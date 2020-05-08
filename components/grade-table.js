@@ -5,7 +5,6 @@ class GradeTable  {
   }
 
   updateGrades(grades) {
-    console.log(this.tableElement);
     var tbody = this.tableElement.querySelector('tbody');
     $(tbody).empty();
 
@@ -23,6 +22,5 @@ class GradeTable  {
       $($row).append($grade);
       $('tbody').append($rowend);
     });
-    console.log(grades);
   }
 }
