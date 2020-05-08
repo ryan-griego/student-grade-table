@@ -8,7 +8,7 @@ var newPageHeader = new PageHeader(header);
 var form = document.querySelector('form');
 var newGradeForm = new GradeForm(form);
 
-var newApp = new App(newGradeTable, newPageHeader);
+var newApp = new App(newGradeTable, newPageHeader, newGradeForm);
 
 newGradeTable.updateGrades();
 newApp.start();
