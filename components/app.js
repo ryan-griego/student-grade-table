@@ -1,6 +1,7 @@
 // Primary class
 class App {
-  constructor(gradeTable) {
+  constructor(gradeTable, newPageHeader) {
+    this.newPageHeader = newPageHeader;
     this.gradeTable = gradeTable;
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
@@ -8,13 +9,21 @@ class App {
 
   handleGetGradesError(error) {
     console.error(error);
-    console.log("Error");
   }
 
   handleGetGradesSuccess(grades) {
-    console.log("log grades", grades);
-    console.log("Success");
     this.gradeTable.updateGrades(grades);
+    var total = 0;
+    var totalGrade = [];
+    var totalAverage = 0;
+
+    $.each(grades, function (id, item) {
+      var grade = item.grade;
+      total += grade;
+      totalGrade.push(item.grade);
+      totalAverage = total / grades.length;
+    });
+    this.newPageHeader.updateAverage(totalAverage);
   }
 
   getGrades() {
@@ -28,6 +37,7 @@ class App {
     });
   }
   start() {
+
     this.getGrades();
   }
 }
