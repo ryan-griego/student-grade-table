@@ -30,4 +30,28 @@ class GradeTable  {
     this.deleteGrade = deleteGrade;
   }
 
+  renderGradeRow(data, deleteGrade) {
+
+    $.each(data, function (id, data) {
+      var $row = $('<tr>');
+      var $name = $('<td>' + data.name + '</td>');
+      var $course = $('<td>' + data.course + '</td>');
+      var $grade = $('<td>' + data.grade + '</td>');
+      var $delete = $('<td><button class="btn btn-success">DELETE</button></td>');
+      var $rowend = $('</tr>');
+
+      // $(tbody).append($row);
+      $($row).append($name);
+      $($row).append($course);
+      $($row).append($grade);
+      $($row).append($delete);
+      $($delete).click(function () {
+        this.deleteGrade(data.id);
+      });
+      $('tbody').append($rowend);
+    });
+
+      return $row;
+  }
+
 }
