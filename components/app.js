@@ -1,7 +1,7 @@
 // Primary class
 class App {
   constructor(gradeTable, newPageHeader, gradeForm) {
-    this.gradeForm = this.gradeForm;
+    this.gradeForm = gradeForm;
     this.newPageHeader = newPageHeader;
     this.gradeTable = gradeTable;
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
@@ -44,6 +44,7 @@ class App {
   start() {
 
     this.getGrades();
+
     this.gradeForm.onSubmit(this.createGrade);
   }
 
