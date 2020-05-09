@@ -25,4 +25,9 @@ class GradeTable  {
       $('tbody').append($rowend);
     });
   }
+
+  onDeleteClick(deleteGrade) {
+    this.deleteGrade = deleteGrade;
+  }
+
 }
