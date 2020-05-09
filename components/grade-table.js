@@ -1,7 +1,8 @@
 
 class GradeTable  {
-  constructor(tableElement) {
+  constructor(tableElement, noGradesElement) {
    this.tableElement = tableElement;
+   this.noGradesElement = noGradesElement;
   }
 
   updateGrades(grades) {
@@ -13,6 +14,14 @@ class GradeTable  {
     $('tbody').append($header);
 
     this.renderGradeRow(grades, this.deleteGrade);
+
+    if(grades) {
+      $('p').removeClass('d-none');
+    }
+
+    else {
+      console.log("There are no grades");
+    }
 
     // $.each(grades, function (id, item) {
     //   var $row = $('<tr>');
