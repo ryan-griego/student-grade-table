@@ -5,7 +5,11 @@ var newGradeTable = new GradeTable(table);
 var header = document.querySelector('header');
 var newPageHeader = new PageHeader(header);
 
-var newApp = new App(newGradeTable, newPageHeader);
+var form = document.querySelector('form');
+
+var newGradeForm = new GradeForm(form);
+
+var newApp = new App(newGradeTable, newPageHeader, newGradeForm);
 
 newGradeTable.updateGrades();
 newApp.start();
