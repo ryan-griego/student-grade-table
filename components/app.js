@@ -51,6 +51,24 @@ class App {
   createGrade(name,course,grade) {
     console.log(name,course,grade);
 
+
+
+      var objects = $.ajax({
+        method: "POST",
+        url: "https://sgt.lfzprototypes.com/api/grades",
+        data: {
+          "name": name,
+          "course": course,
+          "grade": grade
+        },
+        dataType: "json",
+        headers: { 'x-access-token': "Ypc8MXvf" },
+        error: this.handleCreateGradeError,
+        success: this.handleCreateGradeSuccess
+      });
+
+
+
   }
 
   handleCreateGradeError(error) {
@@ -58,6 +76,7 @@ class App {
   }
 
   handleCreateGradeSuccess() {
+
     this.getGrades();
   }
 
