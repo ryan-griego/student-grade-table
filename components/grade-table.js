@@ -8,8 +8,10 @@ class GradeTable  {
     var tbody = this.tableElement.querySelector('tbody');
     $(tbody).empty();
 
-    var $header = $('<tr>' + '<td><strong>Name</strong></td>' + '<td><strong>Course</strong></td>' + '<td><strong>Grade</strong></td>' + '</tr>');
+    var $header = $('<tr>' + '<td><strong>Name</strong></td>' + '<td><strong>Course</strong></td>' + '<td><strong>Grade</strong></td>' + '<td><strong>Operations</strong></td>' + '</tr>');
+
     $('tbody').append($header);
+
     $.each(grades, function (id, item) {
       var $row = $('<tr>');
       var $name = $('<td>' + item.name + '</td>');
