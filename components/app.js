@@ -14,11 +14,25 @@ class App {
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
   }
 
+
+
+  getGrades() {
+    var objects = $.ajax({
+      method: "GET",
+      url: "https://sgt.lfzprototypes.com/api/grades",
+      dataType: "json",
+      headers: { 'x-access-token': "Ypc8MXvf" },
+      error: this.handleGetGradesError,
+      success: this.handleGetGradesSuccess
+    });
+  }
+
   handleGetGradesError(error) {
     console.error(error);
   }
 
   handleGetGradesSuccess(grades) {
+
     this.gradeTable.updateGrades(grades);
     var total = 0;
     var totalGrade = [];
@@ -32,22 +46,12 @@ class App {
     });
     this.newPageHeader.updateAverage(totalAverage);
   }
-
-  getGrades() {
-    var objects = $.ajax({
-      method: "GET",
-      url: "https://sgt.lfzprototypes.com/api/grades",
-      dataType: "json",
-      headers: { 'x-access-token': "Ypc8MXvf" },
-      error: this.handleGetGradesError,
-      success: this.handleGetGradesSuccess
-    });
-  }
   start() {
 
     this.getGrades();
 
     this.gradeForm.onSubmit(this.createGrade);
+    this.gradeTable.onDeleteClick(this.deleteGrade);
   }
 
   createGrade(name,course,grade) {
