@@ -12,5 +12,4 @@ var newGradeForm = new GradeForm(form);
 
 var newApp = new App(newGradeTable, newPageHeader, newGradeForm);
 
-// newGradeTable.updateGrades();
 newApp.start();

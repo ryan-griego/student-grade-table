@@ -14,8 +14,6 @@ class App {
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
   }
 
-
-
   getGrades() {
     var objects = $.ajax({
       method: "GET",
@@ -55,7 +53,6 @@ class App {
   }
 
   createGrade(name,course,grade) {
-    console.log(name,course,grade);
      $.ajax({
         method: "POST",
         url: "https://sgt.lfzprototypes.com/api/grades",
@@ -76,21 +73,27 @@ class App {
   }
 
   handleCreateGradeSuccess() {
+    $('tbody').empty();
     this.getGrades();
   }
 
   deleteGrade(id){
-    console.log(id);
-
+    $.ajax({
+      method: "DELETE",
+      url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
+      dataType: "json",
+      headers: { 'x-access-token': "Ypc8MXvf" },
+      error: this.handleDeleteGradeError,
+      success: this.handleDeleteGradeSuccess
+    });
   }
 
   handleDeleteGradeError(error){
     console.error(error);
-
   }
 
   handleDeleteGradeSuccess() {
+    $('tbody').empty();
     this.getGrades();
   }
-
 }
