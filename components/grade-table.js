@@ -12,18 +12,20 @@ class GradeTable  {
 
     $('tbody').append($header);
 
-    $.each(grades, function (id, item) {
-      var $row = $('<tr>');
-      var $name = $('<td>' + item.name + '</td>');
-      var $course = $('<td>' + item.course + '</td>');
-      var $grade = $('<td>' + item.grade + '</td>');
-      var $rowend = $('</tr>');
-      $(tbody).append($row);
-      $($row).append($name);
-      $($row).append($course);
-      $($row).append($grade);
-      $('tbody').append($rowend);
-    });
+    this.renderGradeRow(grades, this.deleteGrade);
+
+    // $.each(grades, function (id, item) {
+    //   var $row = $('<tr>');
+    //   var $name = $('<td>' + item.name + '</td>');
+    //   var $course = $('<td>' + item.course + '</td>');
+    //   var $grade = $('<td>' + item.grade + '</td>');
+    //   var $rowend = $('</tr>');
+    //   $(tbody).append($row);
+    //   $($row).append($name);
+    //   $($row).append($course);
+    //   $($row).append($grade);
+    //   $('tbody').append($rowend);
+    // });
   }
 
   onDeleteClick(deleteGrade) {
