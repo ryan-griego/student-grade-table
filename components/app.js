@@ -73,7 +73,10 @@ class App {
   }
 
   handleCreateGradeSuccess() {
-    $('tbody').empty();
+
+    // var tbody = this.gradeTable.tableElement;
+
+    // tbody.removeChild('tbody');
     this.getGrades();
   }
 
@@ -93,7 +96,7 @@ class App {
   }
 
   handleDeleteGradeSuccess() {
-    $('tbody').empty();
+
     this.getGrades();
   }
 }

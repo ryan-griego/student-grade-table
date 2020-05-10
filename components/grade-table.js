@@ -13,15 +13,14 @@ class GradeTable  {
     else {
       $('p').addClass('d-block');
     }
-
+    var tbody = this.tableElement.querySelector('tbody');
     $(tbody).empty();
 
-    var $header = $('<tr>' + '<td><strong>Name</strong></td>' + '<td><strong>Course</strong></td>' + '<td><strong>Grade</strong></td>' + '<td><strong>Operations</strong></td>' + '</tr>');
+    var $header = $('<tr>' + '<th><strong>Name</strong></th>' + '<th><strong>Course</strong></th>' + '<th><strong>Grade</strong></th>' + '<th><strong>Operations</strong></th>' + '</tr>');
 
     $('tbody').append($header);
 
     for(var i = 0; i < grades.length; i++) {
-    var tbody = this.tableElement.querySelector('tbody');
     var tableRow = this.renderGradeRow(grades[i], this.deleteGrade);
 
     $(tbody).append(tableRow);
