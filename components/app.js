@@ -9,7 +9,20 @@ class App {
     this.createGrade = this.createGrade.bind(this);
     this.handleCreateGradeError = this.handleCreateGradeError.bind(this);
     this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
+    this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this);
+    this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
+  }
 
+  getGrades() {
+    var objects = $.ajax({
+      method: "GET",
+      url: "https://sgt.lfzprototypes.com/api/grades",
+      dataType: "json",
+      headers: { 'x-access-token': "Ypc8MXvf" },
+      error: this.handleGetGradesError,
+      success: this.handleGetGradesSuccess
+    });
   }
 
   handleGetGradesError(error) {
@@ -17,6 +30,7 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
+
     this.gradeTable.updateGrades(grades);
     var total = 0;
     var totalGrade = [];
@@ -30,26 +44,15 @@ class App {
     });
     this.newPageHeader.updateAverage(totalAverage);
   }
-
-  getGrades() {
-    var objects = $.ajax({
-      method: "GET",
-      url: "https://sgt.lfzprototypes.com/api/grades",
-      dataType: "json",
-      headers: { 'x-access-token': "Ypc8MXvf" },
-      error: this.handleGetGradesError,
-      success: this.handleGetGradesSuccess
-    });
-  }
   start() {
 
     this.getGrades();
 
     this.gradeForm.onSubmit(this.createGrade);
+    this.gradeTable.onDeleteClick(this.deleteGrade);
   }
 
   createGrade(name,course,grade) {
-    console.log(name,course,grade);
      $.ajax({
         method: "POST",
         url: "https://sgt.lfzprototypes.com/api/grades",
@@ -70,7 +73,27 @@ class App {
   }
 
   handleCreateGradeSuccess() {
+
     this.getGrades();
   }
 
+  deleteGrade(id){
+    $.ajax({
+      method: "DELETE",
+      url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
+      dataType: "json",
+      headers: { 'x-access-token': "Ypc8MXvf" },
+      error: this.handleDeleteGradeError,
+      success: this.handleDeleteGradeSuccess
+    });
+  }
+
+  handleDeleteGradeError(error){
+    console.error(error);
+  }
+
+  handleDeleteGradeSuccess() {
+
+    this.getGrades();
+  }
 }
