@@ -74,9 +74,6 @@ class App {
 
   handleCreateGradeSuccess() {
 
-    // var tbody = this.gradeTable.tableElement;
-
-    // tbody.removeChild('tbody');
     this.getGrades();
   }
 
