@@ -21,7 +21,8 @@ class GradeTable  {
     $(tbody).append($header);
 
     for(var i = 0; i < grades.length; i++) {
-    var tableRow = this.renderGradeRow(grades[i], this.deleteGrade);
+      // has editgrade bound to grade-table class
+    var tableRow = this.renderGradeRow(grades[i], this.deleteGrade, this.editGrade);
 
     $(tbody).append(tableRow);
     }
@@ -31,7 +32,13 @@ class GradeTable  {
     this.deleteGrade = deleteGrade;
   }
 
-  renderGradeRow(data, deleteGrade) {
+  onEditClick(editGrade) {
+      // DOES NOT HAVE editgrade bound to grade-table class
+
+    this.editGrade = editGrade;
+  }
+
+  renderGradeRow(data, deleteGrade, editGrade) {
 
       var $row = $('<tr>');
       var $name = $('<td>' + data.name + '</td>');
@@ -54,7 +61,10 @@ class GradeTable  {
       });
     $($edit).click(function () {
       // RUN A FUNCTION THAT IS DECLARED IN APP.JS
-     console.log("yard");
+        editGrade(data.id);
+        // debugger
+
+        // this.makeEdit;
     });
       return $row;
   }
