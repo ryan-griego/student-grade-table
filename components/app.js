@@ -19,6 +19,14 @@ class App {
     this.editGrade = this.editGrade.bind(this);
     this.handleEditGradeError = this.handleEditGradeError.bind(this);
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
+
+    this.isEdit = false;
+  }
+
+  makeEdit(edit) {
+    this.isEdit = true;
+    console.log(this.Edit);
+
   }
 
   getGrades() {
@@ -57,6 +65,9 @@ class App {
 
     this.gradeForm.onSubmit(this.createGrade);
     this.gradeTable.onDeleteClick(this.deleteGrade);
+
+    this.gradeTable.onEditClick(this.editGrade);
+
   }
 
   createGrade(name,course,grade) {
@@ -104,12 +115,14 @@ class App {
     this.getGrades();
   }
 
+
+
   editGrade(id) {
     $.ajax({
       method: "PATCH",
       url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
       dataType: "json",
-      {
+      data:{
         "name": "Jane Doe",     // Optional
         "course": "Math 101",   // Optional
         "grade": 100            // Optional
@@ -124,8 +137,22 @@ class App {
     console.error(error);
   }
 
-  handleEditGradeSuccess() {
+  handleEditGradeSuccess(id) {
+    console.log("yard from handleeditgradesccuess");
 
-    this.getGrades();
+    var name = this.gradeForm.formElement.querySelector('#Name');
+
+    this.isEdit = true;
+    $('.add').text("Update");
+    $('.add-text').text("Update grade");
+    // $('#Name').text(id);
+    console.log(id);
+    debugger
+    name.value(id);
+
+
+
+    console.log(this.isEdit);
+    // this.getGrades();
   }
 }
