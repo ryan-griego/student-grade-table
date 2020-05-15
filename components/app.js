@@ -3,15 +3,22 @@ class App {
   constructor(gradeTable, newPageHeader, gradeForm) {
     this.gradeForm = gradeForm;
     this.newPageHeader = newPageHeader;
+
     this.gradeTable = gradeTable;
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
+
     this.createGrade = this.createGrade.bind(this);
     this.handleCreateGradeError = this.handleCreateGradeError.bind(this);
     this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this);
+
     this.deleteGrade = this.deleteGrade.bind(this);
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this);
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
+
+    this.editGrade = this.editGrade.bind(this);
+    this.handleEditGradeError = this.handleEditGradeError.bind(this);
+    this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
   }
 
   getGrades() {
@@ -93,6 +100,31 @@ class App {
   }
 
   handleDeleteGradeSuccess() {
+
+    this.getGrades();
+  }
+
+  editGrade(id) {
+    $.ajax({
+      method: "PATCH",
+      url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
+      dataType: "json",
+      {
+        "name": "Jane Doe",     // Optional
+        "course": "Math 101",   // Optional
+        "grade": 100            // Optional
+      },
+      headers: { 'x-access-token': "Ypc8MXvf" },
+      error: this.handleEditGradeError,
+      success: this.handleEditGradeSuccess
+    });
+  }
+
+  handleEditGradeError(error) {
+    console.error(error);
+  }
+
+  handleEditGradeSuccess() {
 
     this.getGrades();
   }

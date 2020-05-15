@@ -37,18 +37,25 @@ class GradeTable  {
       var $name = $('<td>' + data.name + '</td>');
       var $course = $('<td>' + data.course + '</td>');
       var $grade = $('<td>' + data.grade + '</td>');
-      var $delete = $('<td><button class="btn btn-danger">DELETE</button></td>');
+    var $delete = $('<td><button class="btn btn-danger">DELETE</button></td>');
+    var $edit = $('<button class="btn btn-success">EDIT</button>');
+
       var $rowend = $('</tr>');
 
       $($row).append($name);
       $($row).append($course);
       $($row).append($grade);
       $($row).append($delete);
+    $($row).append($edit);
       $($row).append($rowend);
       $($delete).click(function () {
 
         deleteGrade(data.id);
       });
+    $($edit).click(function () {
+      // RUN A FUNCTION THAT IS DECLARED IN APP.JS
+     console.log("yard");
+    });
       return $row;
   }
 }
