@@ -26,7 +26,7 @@ class App {
     this.editGrade = this.editGrade.bind(this);
 
 
-    this.isEdit = false;
+    this.isEdit = true;
     this.id = 0;
   }
 
@@ -181,15 +181,6 @@ class App {
         success: this.handleEditGradeSuccess
       });
 
-
-
-
-
-
-
-
-
-
   }
 
   handleEditGradeError(error) {
@@ -197,32 +188,16 @@ class App {
   }
 
   handleEditGradeSuccess(id) {
-    console.log("yard from handleeditgradesccuess");
+    console.log("from handleeditgradesccuess");
     console.log("log ID in handleeditgrade sccuess", id);
 
     var name = this.gradeForm.formElement.querySelector('#Name');
 
-    $('.add').text("Update");
-    $('.add-text').text("Update grade");
-
-
-
-
-    this.isEdit = true;
     this.id = id.id;
-
-
     console.log(id);
-
-
-
-
-
-
     console.log(this.isEdit);
-    this.getGrades();
-    $('.add').text("Edit");
-    $('.add-text').text("Edit Grade");
+
+
     var name = this.gradeForm.formElement.querySelector('#Name');
     if(this.isEdit) {
       $('#Name').val(id.name);
@@ -230,13 +205,18 @@ class App {
 
       $('#Grade').val(id.grade);
       console.log("do not reset the form");
-
-
+      $('.add').text("Update");
+      $('.add-text').text("Update grade");
 
     }
 
     else {
+
+
+      this.getGrades();
       this.gradeForm.formElement.reset();
+      $('.add').text("Add");
+      $('.add-text').text("Add Grade");
       this.isEdit = false;
     }
     // this.isEdit = false;

@@ -45,6 +45,7 @@
       newApp.isEdit = false;
 
       event.target.reset();
+      console.log("the current status of edit happens after editgrade", checkEdit);
 
 
     }
@@ -53,9 +54,10 @@
       // edit the current grade in the table
       this.createGrade(getDataName, getDataCourse, getDataGrade);
       event.target.reset();
+      console.log("the current status of edit happens after creatgrade", checkEdit);
+
 
     }
-    console.log("the current status of edit is", checkEdit);
 
 
 
