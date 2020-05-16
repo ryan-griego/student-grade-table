@@ -5,18 +5,60 @@
     this.formElement.addEventListener('submit', this.handleSubmit);
   }
 
-  onSubmit(createGrade) {
+  onSubmit(createGrade, editGrade) {
     this.createGrade = createGrade;
+    this.editGrade = editGrade;
   }
 
   handleSubmit(event) {
+
+    // console.log(this.isEdit);
+    // console.log(event);
+
+    // console.log(newApp.isEdit());
+
+
     event.preventDefault();
     var formData = new FormData(event.target);
     var getDataName = formData.get('name');
     var getDataCourse = formData.get('course');
     var getDataGrade = formData.get('grade');
-    this.createGrade(getDataName, getDataCourse, getDataGrade);
-    event.target.reset();
+    var checkEdit = newApp.isEdit;
+    var id = newApp.id;
+
+    if(checkEdit) {
+      // add a new grade to the table
+      // NEEDS TO PASS IN THE ID OF THE CLICKED STUDENT
+      this.editGrade(id,getDataName, getDataCourse, getDataGrade);
+
+      event.target.reset();
+
+      console.log("edit grade function did run");
+      console.log("ID of clicked student", id);
+      $('.add').text("Add");
+      $('.add-text').text("Add grade");
+      $('#Name').val("");
+      $('#Course').val("");
+
+      $('#Grade').val("");
+
+      newApp.isEdit = false;
+
+      event.target.reset();
+
+
+    }
+
+    else{
+      // edit the current grade in the table
+      this.createGrade(getDataName, getDataCourse, getDataGrade);
+      event.target.reset();
+
+    }
+    console.log("the current status of edit is", checkEdit);
+
+
+
 
   }
 }

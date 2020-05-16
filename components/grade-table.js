@@ -61,7 +61,8 @@ class GradeTable  {
       });
     $($edit).click(function () {
       // RUN A FUNCTION THAT IS DECLARED IN APP.JS
-        editGrade(data.id);
+
+        editGrade(data.id,data.name,data.course,data.grade);
         // debugger
 
         // this.makeEdit;
