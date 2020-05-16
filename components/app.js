@@ -26,7 +26,7 @@ class App {
     this.editGrade = this.editGrade.bind(this);
 
 
-    this.isEdit = true;
+    this.isEdit = false;
     this.id = 0;
   }
 

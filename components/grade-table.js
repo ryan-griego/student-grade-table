@@ -34,7 +34,6 @@ class GradeTable  {
 
   onEditClick(editGrade) {
       // DOES NOT HAVE editgrade bound to grade-table class
-
     this.editGrade = editGrade;
   }
 
