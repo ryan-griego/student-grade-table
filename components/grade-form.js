@@ -30,11 +30,11 @@
     var id = newApp.id;
 
     if(checkEdit) {
-      // add a new grade to the table
+      // edit a grade in the table
       // NEEDS TO PASS IN THE ID OF THE CLICKED STUDENT
       this.editGrade(id,getDataName, getDataCourse, getDataGrade);
 
-      event.target.reset();
+      // event.target.reset();
 
       console.log("edit grade function did run");
       console.log("ID of clicked student", id);
@@ -47,7 +47,7 @@
 
       newApp.isEdit = false;
 
-      event.target.reset();
+      // event.target.reset();
 
       // var tbody = newGradeTable.tableElement.querySelector('tbody');
       // $(tbody).empty();
