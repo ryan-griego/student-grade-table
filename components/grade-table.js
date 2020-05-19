@@ -6,6 +6,7 @@ class GradeTable  {
   }
 
   updateGrades(grades) {
+
     if (grades != 0) {
       $('p').addClass('d-none');
     }
@@ -30,6 +31,7 @@ class GradeTable  {
 
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
+
   }
 
   onEditClick(editGrade) {

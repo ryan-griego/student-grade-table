@@ -66,6 +66,8 @@ class App {
     });
     this.newPageHeader.updateAverage(totalAverage);
   }
+
+
   start() {
 
     this.getGrades();
@@ -100,6 +102,7 @@ class App {
   handleCreateGradeSuccess() {
 
     this.getGrades();
+    this.isEdit = false;
   }
 
   deleteGrade(id){
@@ -120,10 +123,13 @@ class App {
   handleDeleteGradeSuccess() {
 
     this.getGrades();
+
+    this.isEdit = false;
+
   }
 
   showGrade(id) {
-
+    debugger
     // this.getGrades();
     console.log("showGrade function was run");
     $('#Name').val(id.name);
@@ -188,6 +194,8 @@ class App {
   }
 
   handleEditGradeSuccess(id) {
+
+    this.isEdit = true;
     console.log("from handleeditgradesccuess");
     console.log("log ID in handleeditgrade sccuess", id);
 
@@ -199,7 +207,11 @@ class App {
 
 
     var name = this.gradeForm.formElement.querySelector('#Name');
-    if(this.isEdit) {
+
+
+         // this code below is not doing anything
+    if(this.isEdit == true) {
+
       $('#Name').val(id.name);
       $('#Course').val(id.course);
 
@@ -211,13 +223,14 @@ class App {
     }
 
     else {
+      // this code below is not doing anything
+      this.isEdit = false;
 
 
       this.getGrades();
       this.gradeForm.formElement.reset();
       $('.add').text("Add");
       $('.add-text').text("Add Grade");
-      this.isEdit = false;
     }
     // this.isEdit = false;
 
