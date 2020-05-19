@@ -12,6 +12,9 @@
 
   handleSubmit(event) {
 
+    var clickedEditorUpdate = event.currentTarget;
+    console.log("clickedEditorUpdate", clickedEditorUpdate);
+
     // console.log(this.isEdit);
     // console.log(event);
 
@@ -45,6 +48,10 @@
       newApp.isEdit = false;
 
       event.target.reset();
+
+      // var tbody = newGradeTable.tableElement.querySelector('tbody');
+      // $(tbody).empty();
+      newGradeTable.updateGrades()
       console.log("the current status of edit happens after editgrade", checkEdit);
 
 
