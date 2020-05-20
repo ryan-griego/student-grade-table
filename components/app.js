@@ -30,11 +30,7 @@ class App {
     this.id = 0;
   }
 
-  makeEdit(edit) {
-    this.isEdit = true;
-    console.log(this.Edit);
 
-  }
 
   getGrades() {
     var objects = $.ajax({
@@ -124,20 +120,20 @@ class App {
 
     this.getGrades();
 
-    this.isEdit = false;
+    // this.isEdit = false;
 
   }
 
   showGrade(id) {
-    debugger
+
     // this.getGrades();
     console.log("showGrade function was run");
-    $('#Name').val(id.name);
-    $('#Course').val(id.course);
+    // $('#Name').val(id.name);
+    // $('#Course').val(id.course);
 
-    $('#Grade').val(id.grade);
-    $('.add').text("Update");
-    $('.add-text').text("Update grade");
+    // $('#Grade').val(id.grade);
+    // $('.add').text("Update");
+    // $('.add-text').text("Update grade");
 
 
     $.ajax({
@@ -195,10 +191,12 @@ class App {
 
   handleEditGradeSuccess(id) {
 
-    this.isEdit = true;
-    console.log("from handleeditgradesccuess");
-    console.log("log ID in handleeditgrade sccuess", id);
 
+    this.isEdit = true;
+
+    this.getGrades();
+    $('.add').text("Add");
+    $('.add-text').text("Add Grade");
     var name = this.gradeForm.formElement.querySelector('#Name');
 
     this.id = id.id;
@@ -210,27 +208,31 @@ class App {
 
 
          // this code below is not doing anything
-    if(this.isEdit == true) {
 
-      $('#Name').val(id.name);
-      $('#Course').val(id.course);
+    if(this.isEdit == false) {
+      this.getGrades();
+      $('.add').text("Add");
+      $('.add-text').text("Add Grade");
 
-      $('#Grade').val(id.grade);
-      console.log("do not reset the form");
-      $('.add').text("Update");
-      $('.add-text').text("Update grade");
 
     }
 
     else {
       // this code below is not doing anything
-      this.isEdit = false;
+      // this.isEdit = false;
+
+      // this.gradeForm.formElement.reset();
 
 
-      this.getGrades();
-      this.gradeForm.formElement.reset();
-      $('.add').text("Add");
-      $('.add-text').text("Add Grade");
+
+      $('#Name').val(id.name);
+      $('#Course').val(id.course);
+
+      $('#Grade').val(id.grade);
+      $('.add').text("Update");
+      $('.add-text').text("Update grade");
+      this.isEdit == false;
+
     }
     // this.isEdit = false;
 

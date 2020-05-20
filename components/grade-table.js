@@ -14,6 +14,7 @@ class GradeTable  {
     else {
       $('p').addClass('d-block');
     }
+
     var tbody = this.tableElement.querySelector('tbody');
     $(tbody).empty();
 
@@ -45,8 +46,8 @@ class GradeTable  {
       var $name = $('<td>' + data.name + '</td>');
       var $course = $('<td>' + data.course + '</td>');
       var $grade = $('<td>' + data.grade + '</td>');
-    var $delete = $('<td><button class="btn btn-danger">DELETE</button></td>');
-    var $edit = $('<button class="btn btn-success">EDIT</button>');
+    var $delete = $('<td><span style="color: darkred;"><i class="fas fa-trash"></i></span></td>');
+    var $edit = $('<span style="color: darkgreen;margin-left: 20px;"><i class="far fa-edit"></i></span>');
 
       var $rowend = $('</tr>');
 
