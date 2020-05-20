@@ -11,17 +11,10 @@
   }
 
   handleSubmit(event) {
-
+    event.preventDefault();
     var clickedEditorUpdate = event.currentTarget;
     console.log("clickedEditorUpdate", clickedEditorUpdate);
 
-    // console.log(this.isEdit);
-    // console.log(event);
-
-    // console.log(newApp.isEdit());
-
-
-    event.preventDefault();
     var formData = new FormData(event.target);
     var getDataName = formData.get('name');
     var getDataCourse = formData.get('course');
@@ -30,7 +23,7 @@
     var id = newApp.id;
 
     if(checkEdit) {
-      // edit a grade in the table
+      // edit a grade to the table
       // NEEDS TO PASS IN THE ID OF THE CLICKED STUDENT
       this.editGrade(id,getDataName, getDataCourse, getDataGrade);
 
@@ -51,8 +44,9 @@
 
       // var tbody = newGradeTable.tableElement.querySelector('tbody');
       // $(tbody).empty();
-      newGradeTable.updateGrades()
+      newGradeTable.updateGrades(id, getDataName, getDataCourse, getDataGrade)
       console.log("the current status of edit happens after editgrade", checkEdit);
+
 
 
     }
