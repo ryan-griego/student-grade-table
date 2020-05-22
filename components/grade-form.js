@@ -40,14 +40,8 @@
 
       newApp.isEdit = false;
 
-      // event.target.reset();
-
-      // var tbody = newGradeTable.tableElement.querySelector('tbody');
-      // $(tbody).empty();
       newGradeTable.updateGrades(id, getDataName, getDataCourse, getDataGrade)
       console.log("the current status of edit happens after editgrade", checkEdit);
-
-
 
     }
 
