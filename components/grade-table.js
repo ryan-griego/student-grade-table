@@ -28,6 +28,10 @@ class GradeTable  {
 
     $(tbody).append(tableRow);
     }
+    // added code below on 5/21
+    // newApp.isEdit = false;
+
+
   }
 
   onDeleteClick(deleteGrade) {
