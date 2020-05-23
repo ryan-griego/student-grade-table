@@ -23,11 +23,11 @@ class App {
     this.handleEditGradeError = this.handleEditGradeError.bind(this);
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
 
-    this.editGrade = this.editGrade.bind(this);
 
 
-    this.isEdit = false;
-    this.id = 0;
+    this.gradeCapture = [];
+
+    this.editStudent = this.editStudent.bind(this);
   }
 
 
@@ -50,6 +50,8 @@ class App {
   handleGetGradesSuccess(grades) {
 
     this.gradeTable.updateGrades(grades);
+    this.gradeCapture = grades;
+
     var total = 0;
     var totalGrade = [];
     var totalAverage = 0;
@@ -71,7 +73,7 @@ class App {
     this.gradeForm.onSubmit(this.createGrade, this.editGrade);
     this.gradeTable.onDeleteClick(this.deleteGrade);
 
-    this.gradeTable.onEditClick(this.editGrade);
+    this.gradeTable.onEditClick(this.editStudent);
 
   }
 
@@ -95,10 +97,10 @@ class App {
     console.error(error);
   }
 
-  handleCreateGradeSuccess() {
+  handleCreateGradeSuccess(response) {
+    this.gradeCapture.push(response);
 
     this.getGrades();
-    this.isEdit = false;
   }
 
   deleteGrade(id){
@@ -117,7 +119,11 @@ class App {
   }
 
   handleDeleteGradeSuccess() {
+    for (var i = 0; i < this.gradeCapture.length; i++) {
 
+      if (this.gradeCapture[i].id == this.deleteGrade);
+        this.gradeCapture.splice(i, 1);
+    }
     this.getGrades();
 
     // this.isEdit = false;
@@ -126,16 +132,7 @@ class App {
 
   showGrade(id) {
 
-    // this.getGrades();
     console.log("showGrade function was run");
-    // $('#Name').val(id.name);
-    // $('#Course').val(id.course);
-
-    // $('#Grade').val(id.grade);
-    // $('.add').text("Update");
-    // $('.add-text').text("Update grade");
-
-
     $.ajax({
       method: "GET",
       url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
@@ -162,14 +159,11 @@ class App {
 
 
 
-  editGrade(id,name,course,grade) {
-
-
-    console.log(name);
-
+  editGrade(name,course,grade) {
+    console.log("edit grade activated");
       $.ajax({
         method: "PATCH",
-        url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
+        url: 'https://sgt.lfzprototypes.com/api/grades/' + this.id,
         dataType: "json",
         data: {
           "name": name,     // Optional
@@ -189,19 +183,25 @@ class App {
     console.error(error);
   }
 
-  handleEditGradeSuccess(id) {
+  handleEditGradeSuccess(id, name, course, grade) {
 
+    // for (var i = 0; i < this.gradeCapture.length; i++) {
+    //   if (this.gradeCapture[i].id == this.editGrade.id) {
+    //     debugger
+    //     this.gradeCapture[i].name = this.editGrade.name;
+    //     this.gradeCapture[i].course = this.editGrade.course;
+    //     this.gradeCapture[i].grade = this.editGrade.grade;
+    //   }
+    // }
 
-    this.isEdit = true;
 
     this.getGrades();
-    $('.add').text("Add");
-    $('.add-text').text("Add Grade");
+    // $('.add').text("Add");
+    // $('.add-text').text("Add Grade");
     var name = this.gradeForm.formElement.querySelector('#Name');
 
-    this.id = id.id;
-    console.log(id);
-    console.log(this.isEdit);
+    this.id = id;
+
 
 
     var name = this.gradeForm.formElement.querySelector('#Name');
@@ -209,34 +209,23 @@ class App {
 
          // this code below is not doing anything
 
-    if(this.isEdit == false) {
-      this.getGrades();
-      $('.add').text("Add");
-      $('.add-text').text("Add Grade");
-
-
-    }
-
-    else {
-      // this code below is not doing anything
-      // this.isEdit = false;
-
-      // this.gradeForm.formElement.reset();
-
-
 
       $('#Name').val(id.name);
       $('#Course').val(id.course);
 
       $('#Grade').val(id.grade);
-      $('.add').text("Update");
-      $('.add-text').text("Update grade");
-      this.isEdit == false;
 
-    }
-    // this.isEdit = false;
+      $('.add').text("Add");
+      $('.add-text').text("Add grade");
 
 
 
   }
+
+  editStudent(id) {
+
+    this.id = id;
+
+  }
+
 }
