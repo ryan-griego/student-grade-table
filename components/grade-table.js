@@ -1,4 +1,3 @@
-
 class GradeTable  {
   constructor(tableElement, noGradesElement) {
    this.tableElement = tableElement;
@@ -19,55 +18,52 @@ class GradeTable  {
     $(tbody).empty();
 
     var $header = $('<tr>' + '<th><strong>Name</strong></th>' + '<th><strong>Course</strong></th>' + '<th><strong>Grade</strong></th>' + '<th><strong>Operations</strong></th>' + '</tr>');
-
     $(tbody).append($header);
 
     for(var i = 0; i < grades.length; i++) {
-      // has editgrade bound to grade-table class
-
     var tableRow = this.renderGradeRow(grades[i], this.deleteGrade, this.editStudent);
 
     $(tbody).append(tableRow);
     }
-    // added code below on 5/21
-    // newApp.isEdit = false;
-
 
   }
 
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
-
   }
 
   onEditClick(editStudent) {
-      // DOES NOT HAVE editgrade bound to grade-table class
     this.editStudent = editStudent;
   }
 
-
-
   renderGradeRow(data, deleteGrade, editStudent) {
 
-      var $row = $('<tr>');
-      var $name = $('<td>' + data.name + '</td>');
-      var $course = $('<td>' + data.course + '</td>');
-      var $grade = $('<td>' + data.grade + '</td>');
-    var $delete = $('<td><span style="color: darkred;"><i class="fas fa-trash"></i></span></td>');
+    var $row = $('<tr>');
+    var $name = $('<td>' + data.name + '</td>');
+    var $course = $('<td>' + data.course + '</td>');
+    var $grade = $('<td>' + data.grade + '</td>');
+    var $cell = $('<td>');
+    var $delete = $('<span style="color: darkred;"><i class="fas fa-trash"></i></span>');
     var $edit = $('<span style="color: darkgreen;margin-left: 20px;"><i class="far fa-edit"></i></span>');
+    var $cellend = $('</td>');
 
       var $rowend = $('</tr>');
 
-      $($row).append($name);
-      $($row).append($course);
-      $($row).append($grade);
-      $($row).append($delete);
-    $($row).append($edit);
-      $($row).append($rowend);
-      $($delete).click(function () {
+    $($row).append($name);
+    $($row).append($course);
+    $($row).append($grade);
+    $($row).append($cell);
 
+    $($cell).append($delete);
+    $($cell).append($edit);
+    $($row).append($cellend);
+
+    $($row).append($rowend);
+
+      $($delete).click(function () {
         deleteGrade(data.id);
       });
+
     $($edit).click(function () {
       document.getElementById('Name').value = data.name;
       document.getElementById('Course').value = data.course;
@@ -76,11 +72,10 @@ class GradeTable  {
       document.getElementById('add').textContent = "Update";
       document.getElementById('add-text').textContent = "Update Grade";
 
-        editStudent(data.id);
+      editStudent(data.id);
 
-
-        // this.makeEdit;
     });
+
       return $row;
   }
 }

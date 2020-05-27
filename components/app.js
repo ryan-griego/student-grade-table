@@ -6,8 +6,6 @@ class App {
 
     this.gradeTable = gradeTable;
 
-    this.showGrade = this.showGrade.bind(this);
-
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
 
@@ -23,14 +21,10 @@ class App {
     this.handleEditGradeError = this.handleEditGradeError.bind(this);
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
 
-
-
     this.gradeCapture = [];
-
     this.editStudent = this.editStudent.bind(this);
+    this.id = 0;
   }
-
-
 
   getGrades() {
     var objects = $.ajax({
@@ -48,7 +42,8 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
-
+    document.getElementById('add').textContent = "Add";
+    document.getElementById('add-text').textContent = "Add Grade";
     this.gradeTable.updateGrades(grades);
     this.gradeCapture = grades;
 
@@ -67,12 +62,9 @@ class App {
 
 
   start() {
-
     this.getGrades();
-
     this.gradeForm.onSubmit(this.createGrade, this.editGrade);
     this.gradeTable.onDeleteClick(this.deleteGrade);
-
     this.gradeTable.onEditClick(this.editStudent);
 
   }
@@ -99,7 +91,6 @@ class App {
 
   handleCreateGradeSuccess(response) {
     this.gradeCapture.push(response);
-
     this.getGrades();
   }
 
@@ -125,42 +116,14 @@ class App {
         this.gradeCapture.splice(i, 1);
     }
     this.getGrades();
-
-    // this.isEdit = false;
-
   }
 
-  showGrade(id) {
-
-    console.log("showGrade function was run");
-    $.ajax({
-      method: "GET",
-      url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
-      dataType: "json",
-      headers: { 'x-access-token': "Ypc8MXvf" },
-      error: this.handleShowGradeError,
-      success: this.handleShowGradeSuccess
-    });
-  }
-  handleShowGradeError(error) {
-    console.log()
-    console.error(error);
-  }
-
-  handleShowGradeSuccess() {
-
-    console.log("YOU DID IT", id);
-    $('#Name').val(id.name);
-    $('#Course').val(id.course);
-
-    $('#Grade').val(id.grade);
-  }
 
 
 
 
   editGrade(name,course,grade) {
-    console.log("edit grade activated");
+    console.log("editGrade was activated");
       $.ajax({
         method: "PATCH",
         url: 'https://sgt.lfzprototypes.com/api/grades/' + this.id,
@@ -184,48 +147,22 @@ class App {
   }
 
   handleEditGradeSuccess(id, name, course, grade) {
-
-    // for (var i = 0; i < this.gradeCapture.length; i++) {
-    //   if (this.gradeCapture[i].id == this.editGrade.id) {
-    //     debugger
-    //     this.gradeCapture[i].name = this.editGrade.name;
-    //     this.gradeCapture[i].course = this.editGrade.course;
-    //     this.gradeCapture[i].grade = this.editGrade.grade;
-    //   }
-    // }
-
-
     this.getGrades();
-    // $('.add').text("Add");
-    // $('.add-text').text("Add Grade");
-    var name = this.gradeForm.formElement.querySelector('#Name');
-
     this.id = id;
-
-
-
     var name = this.gradeForm.formElement.querySelector('#Name');
 
+    $('#Name').val(id.name);
+    $('#Course').val(id.course);
+    $('#Grade').val(id.grade);
+    document.getElementById('add').textContent = "Add";
+    document.getElementById('add-text').textContent = "Add Grade";
 
-         // this code below is not doing anything
-
-
-      $('#Name').val(id.name);
-      $('#Course').val(id.course);
-
-      $('#Grade').val(id.grade);
-
-      $('.add').text("Add");
-      $('.add-text').text("Add grade");
-
-
-
+    $('#Name').val("");
+    $('#Course').val("");
+    $('#Grade').val("");
   }
 
   editStudent(id) {
-
     this.id = id;
-
   }
-
 }
