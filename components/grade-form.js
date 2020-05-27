@@ -13,14 +13,11 @@
   handleSubmit(event) {
     event.preventDefault();
     var clickedEditorUpdate = event.currentTarget;
-    console.log("clickedEditorUpdate", clickedEditorUpdate);
-
     var formData = new FormData(event.target);
     var getDataName = formData.get('name');
     var getDataCourse = formData.get('course');
     var getDataGrade = formData.get('grade');
 
-    console.log(document.getElementById('add').value);
     if (document.getElementById('add').value == 'Add') {
       this.createGrade(getDataName, getDataCourse, getDataGrade);
     }
