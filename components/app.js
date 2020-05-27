@@ -123,7 +123,6 @@ class App {
 
 
   editGrade(name,course,grade) {
-    console.log("editGrade was activated");
       $.ajax({
         method: "PATCH",
         url: 'https://sgt.lfzprototypes.com/api/grades/' + this.id,

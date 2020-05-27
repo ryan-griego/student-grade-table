@@ -11,6 +11,5 @@ class PageHeader {
   }
 
   newAverage() {
-    console.log(newAverage);
   }
 }
