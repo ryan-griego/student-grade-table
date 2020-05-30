@@ -3,15 +3,27 @@ class App {
   constructor(gradeTable, newPageHeader, gradeForm) {
     this.gradeForm = gradeForm;
     this.newPageHeader = newPageHeader;
+
     this.gradeTable = gradeTable;
+
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
+
     this.createGrade = this.createGrade.bind(this);
     this.handleCreateGradeError = this.handleCreateGradeError.bind(this);
     this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this);
+
     this.deleteGrade = this.deleteGrade.bind(this);
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this);
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
+
+    this.editGrade = this.editGrade.bind(this);
+    this.handleEditGradeError = this.handleEditGradeError.bind(this);
+    this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
+
+    this.gradeCapture = [];
+    this.editStudent = this.editStudent.bind(this);
+    this.id = 0;
   }
 
   getGrades() {
@@ -30,8 +42,16 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
+    console.log("log grades parameter in handleGetGradesSuccess function", grades);
+
+    document.getElementById('add').textContent = "Add";
+    document.getElementById('add-text').textContent = "Add Grade";
+    this.gradeCapture = grades;
+
+    console.log("log this.gradeCapture in handleGetGradesSuccess function", this.gradeCapture);
 
     this.gradeTable.updateGrades(grades);
+
     var total = 0;
     var totalGrade = [];
     var totalAverage = 0;
@@ -44,12 +64,12 @@ class App {
     });
     this.newPageHeader.updateAverage(totalAverage);
   }
+
   start() {
-
     this.getGrades();
-
-    this.gradeForm.onSubmit(this.createGrade);
+    this.gradeForm.onSubmit(this.createGrade, this.editGrade);
     this.gradeTable.onDeleteClick(this.deleteGrade);
+    this.gradeTable.onEditClick(this.editStudent);
   }
 
   createGrade(name,course,grade) {
@@ -72,9 +92,12 @@ class App {
     console.error(error);
   }
 
-  handleCreateGradeSuccess() {
+  // EXTRA GET REQUEST HAPPENS HERE
+  handleCreateGradeSuccess(response) {
+    this.gradeCapture.push(response);
 
-    this.getGrades();
+    console.log("Log gradeCapture inside handleCreateGradeSuccess", newApp.gradeCapture);
+    this.gradeTable.updateGrades(newApp.gradeCapture);
   }
 
   deleteGrade(id){
@@ -92,8 +115,58 @@ class App {
     console.error(error);
   }
 
+  // EXTRA GET REQUEST HAPPENS HERE
   handleDeleteGradeSuccess() {
+    console.log("log gradeCapture in delete function first", this.gradeCapture);
+    for (var i = 0; i < this.gradeCapture.length; i++) {
+
+      if (this.gradeCapture[i].id == this.deleteGrade);
+        this.gradeCapture.splice(i, 1);
+    }
+    this.getGrades();
+
+    // this.gradeTable.updateGrades(this.gradeCapture);
+    // console.log("log gradeCapture in delete function last", this.gradeCapture);
+  }
+
+  editGrade(name,course,grade) {
+      $.ajax({
+        method: "PATCH",
+        url: 'https://sgt.lfzprototypes.com/api/grades/' + this.id,
+        dataType: "json",
+        data: {
+          "name": name,     // Optional
+
+          "course": course,
+          "grade": grade        // Optional
+        },
+
+        headers: { 'x-access-token': "Ypc8MXvf" },
+        error: this.handleEditGradeError,
+        success: this.handleEditGradeSuccess
+      });
+
+  }
+
+  handleEditGradeError(error) {
+    console.error(error);
+  }
+
+  // EXTRA GET REQUEST HAPPENS HERE
+  handleEditGradeSuccess(id, name, course, grade) {
+
+    for (var i = 0; i < this.gradeCapture.length; i++) {
+      if (this.gradeCapture[i].id == id) {
+        this.gradeCapture[i].name = name;
+        this.gradeCapture[i].course = course;
+        this.gradeCapture[i].grade = grade;
+      }
+    }
 
     this.getGrades();
+  }
+
+  editStudent(id) {
+    this.id = id;
   }
 }

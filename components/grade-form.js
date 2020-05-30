@@ -5,18 +5,26 @@
     this.formElement.addEventListener('submit', this.handleSubmit);
   }
 
-  onSubmit(createGrade) {
+  onSubmit(createGrade, editGrade) {
     this.createGrade = createGrade;
+    this.editGrade = editGrade;
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    var clickedEditorUpdate = event.currentTarget;
     var formData = new FormData(event.target);
     var getDataName = formData.get('name');
     var getDataCourse = formData.get('course');
     var getDataGrade = formData.get('grade');
-    this.createGrade(getDataName, getDataCourse, getDataGrade);
-    event.target.reset();
 
+    if (document.getElementById('add').value == 'Add') {
+      this.createGrade(getDataName, getDataCourse, getDataGrade);
+    }
+    else {
+      this.editGrade(getDataName, getDataCourse, getDataGrade);
+      document.getElementById('add').value = 'Add';
+    }
+    event.target.reset();
   }
 }
