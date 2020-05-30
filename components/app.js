@@ -42,10 +42,15 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
+    console.log("log grades parameter in handleGetGradesSuccess function", grades);
+
     document.getElementById('add').textContent = "Add";
     document.getElementById('add-text').textContent = "Add Grade";
-    this.gradeTable.updateGrades(grades);
     this.gradeCapture = grades;
+
+    console.log("log this.gradeCapture in handleGetGradesSuccess function", this.gradeCapture);
+
+    this.gradeTable.updateGrades(grades);
 
     var total = 0;
     var totalGrade = [];
@@ -60,13 +65,11 @@ class App {
     this.newPageHeader.updateAverage(totalAverage);
   }
 
-
   start() {
     this.getGrades();
     this.gradeForm.onSubmit(this.createGrade, this.editGrade);
     this.gradeTable.onDeleteClick(this.deleteGrade);
     this.gradeTable.onEditClick(this.editStudent);
-
   }
 
   createGrade(name,course,grade) {
@@ -89,9 +92,12 @@ class App {
     console.error(error);
   }
 
+  // EXTRA GET REQUEST HAPPENS HERE
   handleCreateGradeSuccess(response) {
     this.gradeCapture.push(response);
-    this.getGrades();
+
+    console.log("Log gradeCapture inside handleCreateGradeSuccess", newApp.gradeCapture);
+    this.gradeTable.updateGrades(newApp.gradeCapture);
   }
 
   deleteGrade(id){
@@ -109,18 +115,19 @@ class App {
     console.error(error);
   }
 
+  // EXTRA GET REQUEST HAPPENS HERE
   handleDeleteGradeSuccess() {
+    console.log("log gradeCapture in delete function first", this.gradeCapture);
     for (var i = 0; i < this.gradeCapture.length; i++) {
 
       if (this.gradeCapture[i].id == this.deleteGrade);
         this.gradeCapture.splice(i, 1);
     }
     this.getGrades();
+
+    // this.gradeTable.updateGrades(this.gradeCapture);
+    // console.log("log gradeCapture in delete function last", this.gradeCapture);
   }
-
-
-
-
 
   editGrade(name,course,grade) {
       $.ajax({
@@ -145,20 +152,18 @@ class App {
     console.error(error);
   }
 
+  // EXTRA GET REQUEST HAPPENS HERE
   handleEditGradeSuccess(id, name, course, grade) {
+
+    for (var i = 0; i < this.gradeCapture.length; i++) {
+      if (this.gradeCapture[i].id == id) {
+        this.gradeCapture[i].name = name;
+        this.gradeCapture[i].course = course;
+        this.gradeCapture[i].grade = grade;
+      }
+    }
+
     this.getGrades();
-    this.id = id;
-    var name = this.gradeForm.formElement.querySelector('#Name');
-
-    $('#Name').val(id.name);
-    $('#Course').val(id.course);
-    $('#Grade').val(id.grade);
-    document.getElementById('add').textContent = "Add";
-    document.getElementById('add-text').textContent = "Add Grade";
-
-    $('#Name').val("");
-    $('#Course').val("");
-    $('#Grade').val("");
   }
 
   editStudent(id) {
