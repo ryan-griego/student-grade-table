@@ -42,14 +42,10 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
-    console.log("log grades parameter in handleGetGradesSuccess function", grades);
 
     document.getElementById('add').textContent = "Add";
     document.getElementById('add-text').textContent = "Add Grade";
     this.gradeCapture = grades;
-
-    console.log("log this.gradeCapture in handleGetGradesSuccess function", this.gradeCapture);
-
     this.gradeTable.updateGrades(grades);
 
     var total = 0;
@@ -92,11 +88,8 @@ class App {
     console.error(error);
   }
 
-  // EXTRA GET REQUEST HAPPENS HERE
   handleCreateGradeSuccess(response) {
     this.gradeCapture.push(response);
-
-    console.log("Log gradeCapture inside handleCreateGradeSuccess", newApp.gradeCapture);
     this.gradeTable.updateGrades(newApp.gradeCapture);
   }
 
@@ -115,18 +108,13 @@ class App {
     console.error(error);
   }
 
-  // EXTRA GET REQUEST HAPPENS HERE
   handleDeleteGradeSuccess() {
-    console.log("log gradeCapture in delete function first", this.gradeCapture);
     for (var i = 0; i < this.gradeCapture.length; i++) {
 
       if (this.gradeCapture[i].id == this.deleteGrade);
         this.gradeCapture.splice(i, 1);
     }
     this.getGrades();
-
-    // this.gradeTable.updateGrades(this.gradeCapture);
-    // console.log("log gradeCapture in delete function last", this.gradeCapture);
   }
 
   editGrade(name,course,grade) {
@@ -136,7 +124,6 @@ class App {
         dataType: "json",
         data: {
           "name": name,     // Optional
-
           "course": course,
           "grade": grade        // Optional
         },
@@ -152,7 +139,6 @@ class App {
     console.error(error);
   }
 
-  // EXTRA GET REQUEST HAPPENS HERE
   handleEditGradeSuccess(id, name, course, grade) {
 
     for (var i = 0; i < this.gradeCapture.length; i++) {
