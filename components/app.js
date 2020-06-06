@@ -114,7 +114,13 @@ class App {
       if (this.gradeCapture[i].id == this.deleteGrade);
         this.gradeCapture.splice(i, 1);
     }
-    this.getGrades();
+
+    this.gradeTable.updateGrades(newApp.gradeCapture);
+
+
+
+
+    // this.getGrades();
   }
 
   editGrade(name,course,grade) {
