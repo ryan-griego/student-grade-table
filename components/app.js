@@ -1,6 +1,9 @@
 // Primary class
 class App {
-  constructor(gradeTable, newPageHeader, gradeForm) {
+  constructor(gradeTable, newPageHeader, gradeForm, cachedGrades) {
+
+    this.cachedGrades = cachedGrades;
+
     this.gradeForm = gradeForm;
     this.newPageHeader = newPageHeader;
 
@@ -45,8 +48,9 @@ class App {
 
     document.getElementById('add').textContent = "Add";
     document.getElementById('add-text').textContent = "Add Grade";
-    this.gradeCapture = grades;
     this.gradeTable.updateGrades(grades);
+    this.cachedGrades.storeGrades(grades);
+    console.log("show me the cachedGrades", this.cachedGrades.savedTable);
 
     var total = 0;
     var totalGrade = [];
@@ -89,11 +93,18 @@ class App {
   }
 
   handleCreateGradeSuccess(response) {
-    this.gradeCapture.push(response);
-    this.gradeTable.updateGrades(newApp.gradeCapture);
+    // this.gradeCapture.push(response);
+    this.cachedGrades.createCachedGrade(response);
+    console.log("log the cached grades inside of handlecreategradessuccess", this.cachedGrades.savedTable);
+
+    this.gradeTable.updateGrades(this.cachedGrades.savedTable);
+
+
+
   }
 
   deleteGrade(id){
+    this.deleteGradeId = id;
     $.ajax({
       method: "DELETE",
       url: 'https://sgt.lfzprototypes.com/api/grades/' + id,
@@ -109,13 +120,16 @@ class App {
   }
 
   handleDeleteGradeSuccess() {
-    for (var i = 0; i < this.gradeCapture.length; i++) {
+    // for (var i = 0; i < this.gradeCapture.length; i++) {
 
-      if (this.gradeCapture[i].id == this.deleteGrade);
-        this.gradeCapture.splice(i, 1);
-    }
+    //   if (this.gradeCapture[i].id == this.deleteGrade);
+    //     this.gradeCapture.splice(i, 1);
+    // }
 
-    this.gradeTable.updateGrades(newApp.gradeCapture);
+    this.cachedGrades.deleteCachedGrade(this.deleteGradeId);
+
+    this.gradeTable.updateGrades(this.cachedGrades.savedTable);
+
 
 
 
@@ -145,17 +159,21 @@ class App {
     console.error(error);
   }
 
-  handleEditGradeSuccess(id, name, course, grade) {
+  handleEditGradeSuccess(grade) {
 
-    for (var i = 0; i < this.gradeCapture.length; i++) {
-      if (this.gradeCapture[i].id == id) {
-        this.gradeCapture[i].name = name;
-        this.gradeCapture[i].course = course;
-        this.gradeCapture[i].grade = grade;
+    this.cachedGrades.updateCachedGrade(grade);
+    this.gradeTable.updateGrades(this.cachedGrades.savedTable);
+
+
+    for (var i = 0; i < this.cachedGrades.savedTable.length; i++) {
+      if (this.cachedGrades.savedTable[i].id == id) {
+        this.cachedGrades.savedTable[i].name = name;
+        this.cachedGrades.savedTable[i].course = course;
+        this.cachedGrades.savedTable[i].grade = grade;
       }
     }
 
-    this.getGrades();
+    // this.getGrades();
   }
 
   editStudent(id) {

@@ -1,3 +1,5 @@
+var cachedGrades = new CachedGrades();
+
 var table = document.querySelector('table');
 var p = document.querySelector('p');
 
@@ -10,6 +12,6 @@ var form = document.querySelector('form');
 
 var newGradeForm = new GradeForm(form);
 
-var newApp = new App(newGradeTable, newPageHeader, newGradeForm);
+var newApp = new App(newGradeTable, newPageHeader, newGradeForm, cachedGrades);
 
 newApp.start();
