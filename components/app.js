@@ -24,9 +24,7 @@ class App {
     this.handleEditGradeError = this.handleEditGradeError.bind(this);
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
 
-    this.gradeCapture = [];
     this.editStudent = this.editStudent.bind(this);
-    this.id = 0;
   }
 
   getGrades() {
