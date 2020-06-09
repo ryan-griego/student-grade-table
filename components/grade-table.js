@@ -25,7 +25,6 @@ class GradeTable  {
 
     $(tbody).append(tableRow);
     }
-
   }
 
   onDeleteClick(deleteGrade) {
@@ -47,7 +46,7 @@ class GradeTable  {
     var $edit = $('<span style="color: darkgreen;margin-left: 20px;"><i class="far fa-edit"></i></span>');
     var $cellend = $('</td>');
 
-      var $rowend = $('</tr>');
+    var $rowend = $('</tr>');
 
     $($row).append($name);
     $($row).append($course);
@@ -60,9 +59,9 @@ class GradeTable  {
 
     $($row).append($rowend);
 
-      $($delete).click(function () {
-        deleteGrade(data.id);
-      });
+    $($delete).click(function () {
+      deleteGrade(data.id);
+    });
 
     $($edit).click(function () {
       document.getElementById('Name').value = data.name;
@@ -75,7 +74,6 @@ class GradeTable  {
       editStudent(data.id);
 
     });
-
       return $row;
   }
 }
