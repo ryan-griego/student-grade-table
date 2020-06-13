@@ -48,7 +48,6 @@ class App {
     document.getElementById('add-text').textContent = "Add Grade";
     this.gradeTable.updateGrades(grades);
     this.cachedGrades.storeGrades(grades);
-    console.log("show me the cachedGrades", this.cachedGrades.savedTable);
 
     var total = 0;
     var totalGrade = [];

@@ -19,7 +19,6 @@ class GradeTable  {
 
     var $header = $('<tr>' + '<th><strong>Name</strong></th>' + '<th><strong>Course</strong></th>' + '<th><strong>Grade</strong></th>' + '<th><strong>Operations</strong></th>' + '</tr>');
     $(tbody).append($header);
-    console.log("log the grades inside the updateGrades function", grades);
     for(var i = 0; i < grades.length; i++) {
     var tableRow = this.renderGradeRow(grades[i], this.deleteGrade, this.editStudent);
 
