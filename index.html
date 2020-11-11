@@ -1,98 +1,80 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-    integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.css"
-    integrity="sha256-pok3KZeHPJvZi4o04UfObTBGUAIkwF/zZWbh+UuKaoE=" crossorigin="anonymous" />
-
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Student Grade Table</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.css" rel="stylesheet">
 </head>
-<body>
 
-<div class="container">
+<body>
+  <div class="container">
     <header>
       <div class="container" style="padding-bottom: 20px;">
         <div class="row align-text-bottom">
-          <div class="col-lg pl-0 pr-0 text-center text-lg-left align-self-center ">
-                <h1>Student Grade Table</h1>
-
+          <div class="col-lg pl-0 pr-0 text-center text-lg-left align-self-center">
+            <h1>Student Grade Table</h1>
           </div>
-          <div class="col-lg pl-0 pr-0  text-center text-lg-right align-self-center ">
-              <h3>Average Grade <span class="badge badge-secondary">888</span></h3>
-
+          <div class="col-lg pl-0 pr-0 text-center text-lg-right align-self-center">
+            <h3>Average Grade <span class="badge badge-secondary"></span></h3>
           </div>
-
         </div>
-
       </div>
-        <hr>
+      <hr>
     </header>
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="table-responsive">
-      <table class="table table-striped">
-        <th>
-          <td><strong>Student Name</strong></td>
-          <td><strong>Course</strong></td>
-          <td><strong>Grade</strong></td>
-        </th>
-      </table>
-      </div>
-      <p class="d-none">No Grades Recorded</p>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <tr>
+              <th></th>
+              <td><strong>Student Name</strong></td>
+              <td><strong>Course</strong></td>
+              <td><strong>Grade</strong></td>
+            </tr>
+          </table>
         </div>
-        <div class="col-lg-4 text-center text-lg-left">
-                        <h3 id="add-text"></h3>
-
-      <form>
-        <div class="form-group">
-         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span>
+        <p class="d-none">No Grades Recorded</p>
+      </div>
+      <div class="col-lg-4 text-center text-lg-left">
+        <h3 id="add-text"></h3>
+        <form>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span>
+              </div><input aria-describedby="nameHelp" class="form-control" id="Name" name="name" placeholder="Name"
+                type="name">
             </div>
-            <input type="Name" class="form-control" id="Name" aria-describedby="nameHelp" placeholder="Name" name="name">
-        </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="far fa-list-alt"></i></i></span>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="far fa-list-alt"></i></span>
+              </div><input aria-describedby="courseHelp" class="form-control" id="Course" name="course"
+                placeholder="Course" type="course">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-graduation-cap"></i></span>
+              </div><input aria-describedby="gradeHelp" class="form-control" id="Grade" name="grade" placeholder="Grade"
+                type="grade">
+            </div>
+            <div class="form-group float-right">
+              <button class="btn btn-success" id="add" type="submit" value="Add"></button> <button
+                class="btn btn-success" type="reset">Cancel</button>
+            </div>
           </div>
-          <input type="Course" class="form-control" id="Course" aria-describedby="courseHelp" placeholder="Course" name="course">
-        </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-graduation-cap"></i></span>
-          </div>
-          <input type="Grade" class="form-control" id="Grade" aria-describedby="gradeHelp" placeholder="Grade" name="grade">
-        </div>
-
-    <div class="form-group float-right">
-        <button type="submit" class="btn btn-success" id="add" value="Add"></button>
-        <button type="reset" class="btn btn-success">Cancel </button>
-
-          </div>
-
-      </form>
-        </div>
-
-        </div>
+        </form>
       </div>
-
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
   <script src="components/app.js"></script>
   <script src="components/grade-table.js"></script>
   <script src="components/page-header.js"></script>
   <script src="components/grade-form.js"></script>
-
-
-
-<script src="main.js"></script>
-
-
+  <script src="main.js"></script>
 </body>
 </html>

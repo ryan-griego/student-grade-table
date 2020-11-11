@@ -10,6 +10,4 @@ class PageHeader {
     badge.text(average);
   }
 
-  newAverage() {
-  }
 }
