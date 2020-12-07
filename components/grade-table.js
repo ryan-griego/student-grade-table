@@ -58,6 +58,7 @@ class GradeTable  {
       });
 
     $($edit).click(function () {
+      console.log("log the data in render grade row", data);
       document.getElementById('Name').value = data.name;
       document.getElementById('Course').value = data.course;
       document.getElementById('Grade').value = data.grade;

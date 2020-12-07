@@ -60,7 +60,7 @@ class App {
     this.gradeTable.onEditClick(this.editStudent);
   }
 
-  createGrade(name,course,grade) {
+  createGrade(name,course,grade,teacher) {
      $.ajax({
         method: "POST",
         url: "https://sgt.lfzprototypes.com/api/grades",
@@ -81,6 +81,7 @@ class App {
   }
 
   handleCreateGradeSuccess(response) {
+    console.log("log the response from posting a new grade", response);
     this.gradeCapture.push(response);
     this.gradeTable.updateGrades(newApp.gradeCapture);
     this.getGrades();
